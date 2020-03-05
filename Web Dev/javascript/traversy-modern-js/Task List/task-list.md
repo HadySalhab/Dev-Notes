@@ -19,3 +19,11 @@ let tasksLS;
     e.target.parentElement.parentElement.remove();
   }
 ```
+
+```Javascript
+if (confirm("Are You Sure?")) {
+   // will prompt a dialog to the user.
+   //if user presses ok -> the if will proceed
+    }
+
+```
