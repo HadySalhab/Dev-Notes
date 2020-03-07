@@ -19,3 +19,17 @@ Same as Coorperative , one task is being run at a given instance of time . Howev
 **cons:** very complex , BUT they are abstracted out from us DEVELOPERS.
 
 **ANDROID IS A PREEMPTIVE MULTITASKING SYSTEM, ANDROID OS DECIDES WHICH TASK IS GOING TO RUN AT ANY GIVEN INSTANCE OF TIME**
+
+---
+
+## Concurrency vs Parallelism
+
+### Concurrency
+
+Multiple tasks appear to make progress during the same time period
+
+### Parallelism
+
+Multple tasks make progress at the same time Instant
+
+Parallelism is a special case of concurrency

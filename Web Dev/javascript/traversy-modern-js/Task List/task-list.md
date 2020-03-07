@@ -27,3 +27,7 @@ if (confirm("Are You Sure?")) {
     }
 
 ```
+
+```Javascript
+  document.addEventListener("DOMContentLoaded", function); //the function will fire as soon as the DOM is loaded
+```
