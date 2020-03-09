@@ -432,3 +432,284 @@ expression_
 ---
 
 ## Smart Cast (Combining type checks with cast)
+
+In Kotlin, you check whether a variable is of a certain type by using an `is` check.
+
+If you check the variable for a certain type, you don’t need to cast it afterward;
+you can use it as having the type you checked for. In effect, the compiler performs the
+cast for you, and we call it a smart cast.
+
+```kotlin
+if(name is String){
+  name.length //compiler will automatically knows that name is a string and it smart-cast it for us to apply any string function on name
+}
+```
+
+The smart cast works only if a variable couldn’t have changed after the is check.
+When you’re using a smart cast with a property of a class, as in this example, the property
+has to be a val and it can’t have a custom accessor.
+
+Otherwise, it would not be
+possible to verify that every access to the property would return the same value.
+An explicit cast to the specific type is expressed via the as keyword:
+val n = e as Num
+
+## `if` statement
+
+If an `if`
+branch is a block, the last expression is returned as a result.
+
+```kotlin
+fun eval(e: Expr): Int =
+if (e is Num) {
+e.value
+} else if (e is Sum) {
+  eval(e.right) + eval(e.left)
+} else {
+throw IllegalArgumentException("Unknown expression")
+}
+```
+
+## Type checking with `when`
+
+```kotlin
+fun eval(e: Expr): Int =
+when (e) {
+is Num ->e.value
+is Sum ->eval(e.right) + eval(e.left)
+else ->throw IllegalArgumentException("Unknown expression")
+}
+```
+
+## `when` with blocks as branches
+
+```kotlin
+//always the last line is returned in a block
+
+fun evalWithLogging(e: Expr): Int =
+when (e) {
+is Num -> {
+  println("num: ${e.value}")
+  e.value //last line
+}
+is Sum -> {
+  val left = evalWithLogging(e.left)
+  val right = evalWithLogging(e.right)
+  println("sum: $left + $right")
+  left + right  //last line
+}
+else -> throw IllegalArgumentException("Unknown expression") //last line
+}
+```
+
+---
+
+## Loops
+
+## `while` loop
+
+```kotlin
+while (condition) {
+/*...*/ //executes as long as the condition is true
+}
+do {
+/*...*/  //will execute at least once
+} while (condition)
+```
+
+## `for` loop
+
+Kotlin uses the concept of `ranges`
+
+A range is essentially just an interval between two values, usually numbers: a start
+and an end. You write it using the .. operator:
+
+```kotlin
+val oneToTen = 1..10 //Note that ranges in Kotlin are closed or inclusive, meaning the second value is always a part of the range.
+
+val oneToNine = 1 until 10 //1 to 10 excluding 10
+val oneToNine = 1..9 //1 to 9 and including 9
+```
+
+```kotlin
+//loops from 1 to 100
+for (i in 1..100) {
+ /*...*/
+ }
+
+ //loops from 100 to 1 by skipping every second number
+ //skipping even numbers in this case
+for (i in 100 downTo 1 step 2) {
+  /*..*/
+ }
+```
+
+## `for` with Collections
+
+The .. syntax to create a range works not only for numbers, but also for characters.
+
+```kotlin
+val binaryReps = TreeMap<Char, String>()
+
+//Iterates over the characters from A to F
+using a range of characters
+for (c in 'A'..'F') {
+val binary = Integer.toBinaryString(c.toInt())
+binaryReps[c] = binary
+}
+
+/*Iterates over a map,,assigning the map key and value to two variables
+for loop allows you to **unpack** an element of a collection you’re iterating over
+You store the result of the **unpacking** in two separate variables: letter receives the key, and binary receives the value.*/
+for ((letter, binary) in binaryReps) {
+println("$letter = $binary")
+}
+```
+
+```kotlin
+val list = arrayListOf("10", "11", "1001")
+for ((element) in list) {
+println("$element")
+}
+```
+
+You can use the same `unpacking` syntax to iterate over a collection while keeping track
+of the index of the current item. You don’t need to create a separate variable to store
+the index and increment it by hand:
+
+```kotlin
+val list = arrayListOf("10", "11", "1001")
+for ((index, element) in list.withIndex()) {
+println("$index : $element")
+}
+```
+
+---
+
+## use `in` or `!in` to check if value is part of a range
+
+You use the in operator to check whether a value is in a range, or its opposite, !in, to
+check whether a value isn’t in a range
+
+```kotlin
+fun isLetter(c: Char) = c in 'a'..'z' || c in 'A'..'Z' //boolean
+fun isNotDigit(c: Char) = c !in '0'..'9' //returns boolean
+```
+
+```kotlin
+c in 'a'..'z' // same as: a <= c && c <= z
+```
+
+## `in` with `when`
+
+```kotlin
+fun recognize(c: Char) = when (c) {
+in '0'..'9' -> "It's a digit!"
+in 'a'..'z', in 'A'..'Z' -> "It's a letter!"
+else -> "I don't know…"
+}
+```
+
+```kotlin
+//check whether kotlin is part of the set
+println("Kotlin" in setOf("Java", "Scala")) //false
+```
+
+---
+
+## Exceptions in kotlin
+
+Exception handling in Kotlin is similar to the way it’s done in Java and many other languages.
+A function can complete in a normal way or throw an exception if an error
+occurs. The function caller can catch this exception and process it; if it doesn’t, the
+exception is rethrown further up the stack.
+
+```kotlin
+if (percentage !in 0..100) {
+throw IllegalArgumentException(
+"A percentage value must be between 0 and 100: $percentage")
+}
+```
+
+Unlike in Java, in Kotlin the throw construct is an expression and can be used as a
+part of other expressions:
+
+```kotlin
+/*
+*In this example, if the condition is satisfied, the program behaves correctly, and the
+percentage variable is initialized with number. Otherwise, an exception is thrown,
+and the variable isn’t initialized.
+*/
+val percentage = if (number in 0..100) number else
+throw IllegalArgumentException(
+"A percentage value must be between 0 and 100: $number")
+```
+
+## `try`, `catch`, and `finally`
+
+```kotlin
+//no need to explicitly specify exceptions that can be thrown from this function
+fun readNumber(reader: BufferedReader): Int? {
+try {
+ val line = reader.readLine()
+ return Integer.parseInt(line)
+}
+ catch (e: NumberFormatException) {
+ return null
+}
+finally {
+ reader.close()
+}
+}
+```
+
+Kotlin doesn’t differentiate between
+checked and unchecked exceptions.
+You don’t specify the exceptions thrown by a
+function, and you may or may not handle any exceptions.
+
+## `try` as an expression
+
+The `try` keyword in Kotlin, just like `if` and `when`, introduces an expression, and you
+can assign its value to a variable.
+Just as in other statements, if the body contains multiple
+expressions, the value of the try expression as a whole is the value of the _last expression._
+
+```kotlin
+fun readNumber(reader: BufferedReader) {
+  //expression block
+val number = try {
+Integer.parseInt(reader.readLine())
+} catch (e: NumberFormatException) {
+null
+}
+println(number)
+}
+>>> val reader = BufferedReader(StringReader("not a number"))
+>>> readNumber(reader)
+
+/*If the execution of a try code block behaves normally, the last expression in the block is the result. If an exception is caught, the last expression in a corresponding catch block is the result.*/
+```
+
+---
+
+## Summary
+
+- The fun keyword is used to declare a function. The val and var keywords
+  declare read-only and mutable variables, respectively.
+- String templates help you avoid noisy string concatenation. Prefix a variable
+  name with $ or surround an expression with ${ } to have its value injected into
+  the string
+- Value-object classes are expressed in a concise way in Kotlin.
+- The familiar if is now an expression with a return value
+- The when expression is analogous to switch in Java but is more powerful.
+- You don’t have to cast a variable explicitly after checking that it has a certain
+  type: the compiler casts it for you automatically using a smart cast.
+- The for, while, and do-while loops are similar to their counterparts in Java,
+  but the for loop is now more convenient, especially when you need to iterate
+  over a map or a collection with an index.
+- The concise syntax 1..5 creates a range. Ranges and progressions allow Kotlin
+  to use a uniform syntax and set of abstractions in for loops and also work with
+  the in and !in operators that check whether a value belongs to a range.
+- Exception handling in Kotlin is very similar to that in Java, except that Kotlin
+  doesn’t require you to declare the exceptions that can be thrown by a function.
