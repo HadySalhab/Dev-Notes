@@ -55,3 +55,47 @@ clip-path: polygon(
 - Fuild Grid : all layout elements are sized in relative unites: % , rem...
 - Flexible Images: all images should be sized using relative unites
 - Media queries
+
+---
+
+- Always good practise to put an inline element like image inside a block level element
+
+```css
+letter-spacing: 35px; //creates spacing among letters
+```
+
+### Animation
+
+Animation in css is created using `@keyframes` and `animation` property
+
+```css
+animation-name: slideUpBottom;
+animation-duration: 1s;
+animation-timing-function: ease-out;
+animation-delay: 0.75s;
+animation-fill-mode: backwards; /*will apply the style of the 0% animation before the animation starts*/
+```
+
+Bugs Can result from animations, like shaking, common way to solve these bugs is to apply `backface-visibility: hidden;` on the element which the animation is being applied on
+
+## pseudo selector for link
+
+```css
+:hover {
+} //when the mouse is hovered over an element
+:active {
+} //when the element is clicked (mouse down)
+```
+
+## box-shadow
+
+```css
+box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;
+```
+
+## Tips
+
+- Inline elements cannot be style with box-model properties
+- since inline elements behave like a text, to center them inside a block element , we can use `text-align:center`
+- to target the ::after element when the element itself is in hover state -> `element:hover::after`
+- if 2/more elements share the same styling, combine these styles in 1 common class then create a different style for each that hold the unique styling (we are composing the styling of an element)

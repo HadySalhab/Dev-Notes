@@ -74,12 +74,16 @@ fun max(a: Int, b: Int): Int = if (a > b) a else b //expression body
 
 fun max(a: Int, b: Int) = if (a > b) a else b //expression body with type inference
 
+```
 
-/*
-Note that omitting the return type is allowed only for functions with an expression
-body. For functions with a block body that return a value, you have to specify the
-return type and write the return statements explicitly*/
+> Functions with an expression body can be found in Kotlin code quite often. This style
+> is used not only for trivial one-line functions, but also for functions that evaluate a single, more complex expression, such as if, when, or try.
+> Note that omitting the return type is allowed only for functions with an expression
+> body. For functions with a block body that return a value, you have to specify the
+> return type and write the return statements explicitly
 
+```kotlin
+fun provideSharedPrefsEditor(sharedPreferences: SharedPreferences) = sharedPreferences.edit()
 ```
 
 ---

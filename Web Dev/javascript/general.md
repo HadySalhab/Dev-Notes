@@ -23,6 +23,33 @@ isFinite(monthly) //determine whether the number supplied is finite.
 > Whenever we have an element, class, id, added after the page has loaded , we need to use `Event Delegation` to fire the event on this target. [Event Delegation](https://stackoverflow.com/questions/1687296/what-is-dom-event-delegation)
 
 ```Javascript
-windown.location.reload(); //reload the page
+window.location.reload(); //reload the page
 
+
+Date.now() //Return the number of milliseconds since 1970/01/01:
+new Date("10-03-1993") //returns the Date object corresponding to the string date passed
+new Date("10-03-1993").getTime() //returns the time in millis since 1970/01/01 to the corresponding string date passed
+new Date(milliscds) //get the date for this milliseconds relative to 1970/01/01
+
+//possible constructor
+new Date()
+new Date(year, month, day, hours, minutes, seconds, milliseconds)
+new Date(milliseconds)
+new Date(date string)
+
+date.getUTCFullYear() //Get the year as a four digit number (yyyy)
+
+new Date(Date.now()).getUTCFullYear() //current year
 ```
+
+---
+
+## `this` keyword
+
+**Regular function call** the `this` keyword points at the global object (window object)
+
+**Method Call** the `this` keyword points to the object that is calling the method
+
+## String
+
+[String.slice() vs String.substring()](https://stackoverflow.com/questions/2243824/what-is-the-difference-between-string-slice-and-string-substring)
