@@ -53,3 +53,44 @@ new Date(Date.now()).getUTCFullYear() //current year
 ## String
 
 [String.slice() vs String.substring()](https://stackoverflow.com/questions/2243824/what-is-the-difference-between-string-slice-and-string-substring)
+
+## Event
+
+Event Delegation is very handy, we want to listen to an element where it appears after the DOM was loaded (@runtime) or when we ahve multiple child elements with the same class, like list Item.
+
+```javascript
+document.querySelector(".btn-roll").addEventListener("click", btn); //callback
+document.querySelector(".btn-roll").addEventListener("click", function(e) {}); //anonymous function
+```
+
+## toggle()
+
+```javascript
+document
+  .querySelector(".player-0-panel")
+  .classList.toggle(
+    "active"
+  ); /*will add the active class if it does not exist, it will remove the active class if it already exists*/
+```
+
+## AJAX
+
+- Asynchronous Javascript & XML
+- Set of web technologies to send and receive data asynchronously
+- Does not interfere with the current page.(no need to reload the page)
+- JSON has replaced XML for the most Part
+
+### Process
+
+1. JS Call (received by AJAX ENGINE)
+1. AJAX ENGINE sends an XMLHttpRequest (XHR) to the Server
+1. Server returns XML/JSON response (received by AJAX ENGINE)
+1. AJAX ENGINE returns an HTML Response.
+
+## Other libraries than AJAX
+
+- Fetch API (Part of JS framework)
+- Axios
+- Superagent
+- jQuery
+- Node HTTP

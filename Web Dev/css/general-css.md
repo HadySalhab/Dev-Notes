@@ -99,3 +99,14 @@ box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;
 - since inline elements behave like a text, to center them inside a block element , we can use `text-align:center`
 - to target the ::after element when the element itself is in hover state -> `element:hover::after`
 - if 2/more elements share the same styling, combine these styles in 1 common class then create a different style for each that hold the unique styling (we are composing the styling of an element)
+- good practice to include the general reset to `after` and `before` pseudo selectors
+
+```css
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+```
