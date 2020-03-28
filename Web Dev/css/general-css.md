@@ -52,7 +52,7 @@ clip-path: polygon(
 
 ### Main Ingredient
 
-- Fuild Grid : all layout elements are sized in relative unites: % , rem...
+- Fuild Grid : all layout elements are sized in relative unites: % , rem...(Float layouts,Flexbox,CSS Grid)
 - Flexible Images: all images should be sized using relative unites
 - Media queries
 
@@ -100,6 +100,7 @@ box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;
 - to target the ::after element when the element itself is in hover state -> `element:hover::after`
 - if 2/more elements share the same styling, combine these styles in 1 common class then create a different style for each that hold the unique styling (we are composing the styling of an element)
 - good practice to include the general reset to `after` and `before` pseudo selectors
+- Always use % to size images in your css.
 
 ```css
 *,
@@ -109,4 +110,65 @@ box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit;
   padding: 0;
   box-sizing: inherit;
 }
+```
+
+## CSS CODE COMPONENT
+
+- Responsive Design
+- Maintainable And Scalable code
+- Web performance
+
+## BEM
+
+- Block: standalone component that is meaningful on its own
+- Element: part of a block that has no standalone meaning
+- Modifier: a diff version of a block or an element.
+
+- `.block{}`
+- `.block__element{}`
+- `.block__element--modifier{}`
+
+## CSS Architect
+
+- base/
+- components/
+- layout/
+- pages/
+- themes/
+- abstracts/
+- vendors/
+
+## SASS Features
+
+- Variables: for reusable values such as colors, font-sizes, spacing, etc.
+- Nesting: to nest selectors inside of one another, allowing us to writes less code.
+- Operators: for mathematical operations
+- Partials And Imports: to write CSS in different files and import
+- Mixins: to write reusable pieces of CSS code
+- Functions: like mixins but they produce value that can be used
+- Extends: to make diff selectors inherit declarations that are common
+- Control Directives: for writing complex code using conditionals and loops
+
+```scss
+.header {
+  &-main {
+    // ".header-main"
+  }
+  &-about {
+    // ".header-about"
+  }
+
+  li {
+    //".header li"
+    a {
+      // ".header li a
+
+      &:hover {
+        // ".header li a:hover"  and NOT ".header li a a:hover"
+      }
+    }
+  }
+}
+
+// & does not append a selector , it replace the parent selector instead
 ```

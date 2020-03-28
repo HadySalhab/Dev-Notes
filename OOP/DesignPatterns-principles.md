@@ -6,17 +6,17 @@ _CHANGE_
 The Goal of design patterns, principles is to handle any future change in the softawre development
 
 - Good OO designs are
-reusable, extensible and
-maintainable.
+  reusable, extensible and
+  maintainable.
 
 - Remember, knowing
-concepts like abstraction,
-inheritance, and polymorphism do
-not make you a good object oriented
-designer. A design guru thinks about
-how to create flexible designs that
-are maintainable and that can
-cope with change.
+  concepts like abstraction,
+  inheritance, and polymorphism do
+  not make you a good object oriented
+  designer. A design guru thinks about
+  how to create flexible designs that
+  are maintainable and that can
+  cope with change.
 
 ## Principles
 
@@ -28,6 +28,8 @@ cope with change.
   depend upon concrete classes. (Dependency inversion principle). It suggests that our
   high-level components should not depend on our low-level
   components; rather, they should both depend on abstractions.
+- Strive for loosely coupled designs
+  between objects that interact.
 
 ## tips
 
@@ -36,6 +38,7 @@ cope with change.
 - object composition allows us to change behavior dynamically at runtime
 - The following guidelines can help you avoid OO designs that violate
   the Dependency Inversion Principle:
+
   - No variable should hold a reference to a concrete class.
   - No class should derive from a concrete class.
   - No method should override an implemented method of
@@ -43,14 +46,17 @@ cope with change.
 
 - HAS-A can be better than IS-A
 - Program to an abstraction, **let your unit not know about the object in it**.
-  
-   ```java
-   /*we dont know anything about the object returned to the animal, we only know that it makes sound*/
-   Animal animal = getAnimal();
-   animal.makeSound(); 
-    ```
 
+  ```java
+  /*we dont know anything about the object returned to the animal, we only know that it makes sound*/
+  Animal animal = getAnimal();
+  animal.makeSound();
+  ```
 
+- Observer Design Patter, You can push or pull data from
+  the Observable when using
+  the pattern (pull is considered
+  more “correct”).
 
 ## Design Patterns
 
@@ -71,7 +77,15 @@ cope with change.
     Dependency Inversion Principle, but it is one of the more powerful ones.**
 
 ### Strategy Pattern
+
 - defines a family of algorithms,
-encapsulates each one, and makes them interchangeable.
-Strategy lets the algorithm vary independently from
-clients that use it.
+  encapsulates each one, and makes them interchangeable.
+  Strategy lets the algorithm vary independently from
+  clients that use it.
+
+### The Observer Pattern (push/pull)
+
+- defines a one-to-many
+  dependency between objects so that when one
+  object changes state, all of its dependents are
+  notified and updated automatically.
